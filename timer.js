@@ -38,7 +38,7 @@ var vm = new Vue({
       }
     },
     seconds() {
-      return (this.finished - this.now)
+      return (this.finished - this.now) % 60
     },
     minutes() {
       return Math.trunc((this.finished - this.now) / 60) % 60
