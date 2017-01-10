@@ -16,27 +16,33 @@ var vm = new Vue({
   },
   data() {
     return {
-      ended: false,
       now: Math.trunc((new Date()).getTime() / 1000),
       finished: Math.trunc((new Date()).getTime() / 1000 + 2)
     }
   },
   mounted() {
     window.setInterval(() => {
-      this.now = Math.trunc((new Date()).getTime() / 1000);
+      this.now = Math.trunc((new Date()).getTime() / 1000)
     },1000);
   },
   computed: {
-    end() {
-      if (Math.trunc(this.finished - this.now) <= 0) {
-        Vue.set(vm, 'ended', true)
+    ended() {
+      var coffee = new Audio('./coffee.mp3')
+      if (this.finished - this.now <= 0 && this.finished - this.now > -1) {
+        coffee.play()
+        return true
+      }
+      if (this.finished - this.now <= -1) {
+	coffee.pause()
+        return true
       }
     },
     seconds() {
-      return (this.finished - this.now);
+      return (this.finished - this.now)
     },
     minutes() {
-      return Math.trunc((this.finished - this.now) / 60) % 60;
+      return Math.trunc((this.finished - this.now) / 60) % 60
     }
   }
 })
+
